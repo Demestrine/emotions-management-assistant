@@ -1,0 +1,5 @@
+# this file tells git what to ignore
+.env
+__pycache__/
+*.pyc
+*.db
