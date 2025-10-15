@@ -1,7 +1,7 @@
 from models import add_emotion
 
 def show_current_emotions():
-    """Show what emotions are currently in the database"""
+    """show what emotions are currently in the database"""
     from db import connect_db
     conn = connect_db()
     cur = conn.cursor()
@@ -14,7 +14,7 @@ def show_current_emotions():
     conn.close()
 
 def add_natural_emotions():
-    """Replace ALL emotions with natural, human-sounding messages"""
+    """Replace ALL emotions with natural, human sounding messages"""
     natural_emotions = [
         ("happy", "That's wonderful to hear. When I feel happy, I try to really soak in the moment. Maybe share that good energy with someone who could use it today."),
         ("sad", "I get that. Some days just feel heavy. When I'm down, making a warm drink and putting on comfortable clothes helps. Or just letting myself be sad for a bit - it usually passes."),
@@ -69,7 +69,7 @@ def main():
     
     show_current_emotions()
     
-    print("\n📝 OPTIONS:")
+    print("\n OPTIONS:")
     print("1. Add natural emotions (will replace everything)")
     print("2. Just clear all emotions")
     print("3. Exit")
@@ -81,7 +81,7 @@ def main():
         if confirm.lower() == 'y':
             clear_emotions()
             add_natural_emotions()
-            print("\n🎉 All emotions updated with natural messages!")
+            print("\n All emotions updated with natural messages!")
             show_current_emotions()
         else:
             print("❌ Cancelled - no changes made")
@@ -90,15 +90,15 @@ def main():
         confirm = input("Clear ALL emotions from database? (y/n): ")
         if confirm.lower() == 'y':
             clear_emotions()
-            print("✅ All emotions cleared!")
+            print(" All emotions cleared!")
         else:
-            print("❌ Cancelled - no changes made")
+            print(" Cancelled ,no changes made")
     
     elif choice == "3":
-        print("👋 Goodbye!")
+        print(" Goodbye!")
     
     else:
-        print("❌ Invalid option")
+        print(" Invalid option")
 
 if __name__ == "__main__":
     main()
