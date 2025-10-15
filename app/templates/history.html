@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion History  Emotional Management Assistant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-purple: #6B46C1;
+            --dark-purple: #553C9A;
+            --light-purple: #9F7AEA;
+            --lighter-purple: #E9D8FD;
+            --accent-purple: #805AD5;
+            --text-dark: #2D3748;
+            --text-light: #718096;
+            --white: #FFFFFF;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--dark-purple) 100%);
+            min-height: 100vh;
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-card h1 {
+            font-family: 'Merriweather', serif;
+            color: var(--dark-purple);
+            margin-bottom: 10px;
+            font-size: 2.2em;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background: var(--primary-purple);
+            color: var(--white);
+        }
+        
+        .btn-secondary {
+            background: var(--light-purple);
+            color: var(--white);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-purple);
+            color: var(--primary-purple);
+        }
+        
+        .history-table {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th {
+            background: var(--lighter-purple);
+            color: var(--dark-purple);
+            font-weight: 600;
+            padding: 15px;
+            text-align: left;
+            border-bottom: 2px solid var(--light-purple);
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #E2E8F0;
+        }
+        
+        tr:hover {
+            background: #F7FAFC;
+        }
+        
+        .intensity-low { color: #38A169; font-weight: 500; }
+        .intensity-medium { color: #D69E2E; font-weight: 500; }
+        .intensity-high { color: #E53E3E; font-weight: 500; }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-light);
+        }
+        
+        .empty-state a {
+            color: var(--primary-purple);
+            text-decoration: none;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-card">
+            <h1>Emotion History</h1>
+            <p>Welcome, {{ user.username }}. Review your emotional journey and patterns.</p>
+            <div class="nav-buttons">
+                <a href="/" class="btn btn-primary">Back to Dashboard</a>
+                <a href="/stats" class="btn btn-secondary">View Statistics</a>
+                <a href="/export" class="btn btn-outline">Export Data</a>
+            </div>
+        </div>
+
+        <div class="history-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date & Time</th>
+                        <th>Emotion</th>
+                        <th>Intensity</th>
+                        <th>Context Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for emotion, notes, intensity, created_at in history %}
+                    <tr>
+                        <td>{{ created_at.strftime('%Y-%m-%d at %H:%M') }}</td>
+                        <td><strong style="color: var(--dark-purple);">{{ emotion.title() }}</strong></td>
+                        <td>
+                            <span class="{% if intensity <= 3 %}intensity-low{% elif intensity <= 7 %}intensity-medium{% else %}intensity-high{% endif %}">
+                                {{ intensity }}/10
+                            </span>
+                        </td>
+                        <td>{{ notes or 'No additional context provided' }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="4" class="empty-state">
+                            <h3 style="color: var(--text-light); margin-bottom: 10px;">No emotion history recorded</h3>
+                            <p>Start tracking your emotions to see your journey here.</p>
+                            <a href="/">Begin tracking your emotions</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
