@@ -1,4 +1,4 @@
-from app.models import create_emotions_table, add_emotion
+from models import create_emotions_table, add_emotion
 
 # this small cli helps the user interact with the app in the terminal
 def main():

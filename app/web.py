@@ -1,12 +1,20 @@
-from flask import Flask, request, jsonify
-from app.models import add_emotion
+from flask import Flask, request, jsonify, render_template
+from models import add_emotion, get_advice_for_emotion
 
-# this file will later help to turn the project into a web app using flask
 app = Flask(__name__)
 
 @app.route("/")
 def home():
-    return jsonify({"message": "welcome to the emotion management assistant"})
+    return render_template("index.html")
+
+@app.route("/analyze", methods=["POST"])
+def analyze_emotion():
+    emotion = request.form.get("emotion")
+    if not emotion:
+        return render_template("index.html", response="Please enter an emotion.")
+    
+    advice = get_advice_for_emotion(emotion)
+    return render_template("index.html", response=advice, emotion=emotion)
 
 @app.route("/add", methods=["POST"])
 def add():

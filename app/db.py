@@ -1,6 +1,9 @@
 import psycopg2
-from psycopg2 import sql
 import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # this function connects to the postgresql database
 def connect_db():

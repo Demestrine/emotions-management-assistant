@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Emotions Management Assistant</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            max-width: 600px; 
+            margin: 50px auto; 
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container { 
+            background: white; 
+            padding: 30px; 
+            border-radius: 10px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        input, button { 
+            padding: 10px; 
+            margin: 10px 0; 
+            width: 100%; 
+            box-sizing: border-box;
+        }
+        button { 
+            background: #4169E1; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer;
+        }
+        .response { 
+            margin-top: 20px; 
+            padding: 15px; 
+            background: #e8f4f8; 
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌿 Emotions Management Assistant</h1>
+        <p>How are you feeling today?</p>
+        
+        <form action="/analyze" method="POST">
+            <input type="text" name="emotion" placeholder="Enter your emotion (e.g., happy, sad, anxious)" required>
+            <button type="submit">Get Support</button>
+        </form>
+
+        {% if response %}
+        <div class="response">
+            <strong>💭 Support Message:</strong><br>
+            {{ response }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
