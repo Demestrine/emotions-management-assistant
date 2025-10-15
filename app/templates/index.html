@@ -16,7 +16,7 @@
             border-radius: 10px; 
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-        input, button { 
+        input, button, select { 
             padding: 10px; 
             margin: 10px 0; 
             width: 100%; 
@@ -39,17 +39,49 @@
 </head>
 <body>
     <div class="container">
-        <h1>🌿 Emotions Management Assistant</h1>
+        <h1>Emotions Management Assistant</h1>
         <p>How are you feeling today?</p>
         
         <form action="/analyze" method="POST">
-            <input type="text" name="emotion" placeholder="Enter your emotion (e.g., happy, sad, anxious)" required>
+            <select name="emotion" required>
+                <option value="">-- Choose your emotion --</option>
+                <option value="happy">Happy</option>
+                <option value="sad">Sad</option>
+                <option value="anxious">Anxious</option>
+                <option value="angry">Angry</option>
+                <option value="excited">Excited</option>
+                <option value="tired">Tired</option>
+                <option value="confused">Confused</option>
+                <option value="proud">Proud</option>
+                <option value="calm">Calm</option>
+                <option value="stressed">Stressed</option>
+                <option value="bored">Bored</option>
+                <option value="lonely">Lonely</option>
+                <option value="grateful">Grateful</option>
+                <option value="hopeful">Hopeful</option>
+                <option value="jealous">Jealous</option>
+                <option value="guilty">Guilty</option>
+                <option value="embarrassed">Embarrassed</option>
+                <option value="confident">Confident</option>
+                <option value="overwhelmed">Overwhelmed</option>
+                <option value="peaceful">Peaceful</option>
+                <option value="frustrated">Frustrated</option>
+                <option value="nostalgic">Nostalgic</option>
+                <option value="surprised">Surprised</option>
+                <option value="disappointed">Disappointed</option>
+                <option value="content">Content</option>
+                <option value="energetic">Energetic</option>
+                <option value="playful">Playful</option>
+                <option value="romantic">Romantic</option>
+                <option value="silly">Silly</option>
+                <option value="victorious">Victorious</option>
+            </select>
             <button type="submit">Get Support</button>
         </form>
 
         {% if response %}
         <div class="response">
-            <strong>💭 Support Message:</strong><br>
+            <strong>Support Message:</strong><br>
             {{ response }}
         </div>
         {% endif %}
