@@ -1,0 +1,1 @@
+SELECT * FROM "emotions" LIMIT 1000;
